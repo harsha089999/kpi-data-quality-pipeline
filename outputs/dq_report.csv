@@ -1,0 +1,6 @@
+check,severity,failing_rows,status
+unique_order_id,critical,0,pass
+not_null_store_id,critical,6,fail
+accepted_channel,critical,0,pass
+no_missing_days,warn,1,fail
+row_count_anomaly,warn,1,fail
