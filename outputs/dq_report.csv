@@ -1,6 +1,12 @@
-check,severity,failing_rows,status
-unique_order_id,critical,0,pass
-not_null_store_id,critical,6,fail
-accepted_channel,critical,0,pass
-no_missing_days,warn,1,fail
-row_count_anomaly,warn,1,fail
+check,severity,rule,failing_rows,status,example
+unique_order_id,critical,order_id is unique in orders,0,pass,
+unique_order_line,critical,"(order_id, order_item_id) is unique in items",0,pass,
+items_have_order,critical,every item belongs to a known order,0,pass,
+delivered_has_items,critical,delivered orders have at least one item,0,pass,
+delivered_has_date,critical,delivered orders have a delivery date,8,fail,2d1e2d5bf4dc7227b3bfebb81328c15f
+payment_matches_items,critical,payments equal items + freight within R$1,247,fail,84d6d9710c8af32b5e88f2d1c14ab871
+timestamps_in_order,warn,purchase <= approval <= carrier <= delivery,1382,fail,dcb36b511fcac050b97cd5c05de84dc3
+approved_has_approval_time,warn,non-cancelled orders past 'created' have an approval time,14,fail,e04abd8149ef81b95221e88f6ed9ab6a
+product_has_category,warn,products have a category,610,fail,a41e356c76fab66334f36de622ecbd3a
+no_missing_days,warn,every day in the reporting window has orders,4,fail,2017-01-01 00:00:00
+row_count_anomaly,warn,daily orders not below 50% or above 250% of the trailing 4-week average,24,fail,2017-01-06 00:00:00
